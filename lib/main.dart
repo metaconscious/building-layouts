@@ -13,20 +13,32 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter layout demo',
         home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Flutter layout demo'),
-          ),
-          body: Column(
-            children: const [
-              TitleSection(),
-            ],
-          )
-        ));
+            appBar: AppBar(
+              title: const Text('Flutter layout demo'),
+            ),
+            body: Column(
+              children: const [
+                TitleSection(
+                  name: 'Oeschinen Lake Campground',
+                  location: 'Kandersteg, Switzerland',
+                  stars: 41,
+                ),
+              ],
+            )));
   }
 }
 
 class TitleSection extends StatelessWidget {
-  const TitleSection({Key? key}) : super(key: key);
+  const TitleSection(
+      {Key? key,
+      required this.name,
+      required this.location,
+      required this.stars})
+      : super(key: key);
+
+  final String name;
+  final String location;
+  final int stars;
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +52,15 @@ class TitleSection extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
-                  child: const Text(
-                    'Oeschinen Lake Campground',
-                    style: TextStyle(
+                  child: Text(
+                    name,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Text(
-                  'Kandersteg, Switzerland',
+                  location,
                   style: TextStyle(
                     color: Colors.grey[500],
                   ),
@@ -60,7 +72,7 @@ class TitleSection extends StatelessWidget {
             Icons.star,
             color: Colors.red[500],
           ),
-          const Text('41')
+          Text(stars.toString())
         ],
       ),
     );
