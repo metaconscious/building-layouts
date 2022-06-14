@@ -10,6 +10,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
+
     return MaterialApp(
         title: 'Flutter layout demo',
         home: Scaffold(
@@ -17,14 +19,68 @@ class MyApp extends StatelessWidget {
               title: const Text('Flutter layout demo'),
             ),
             body: Column(
-              children: const [
-                TitleSection(
+              children: [
+                const TitleSection(
                   name: 'Oeschinen Lake Campground',
                   location: 'Kandersteg, Switzerland',
                   stars: 41,
                 ),
+                ButtonSection(buttons: <ButtonItem>[
+                  ButtonItem(icon: Icons.call, color: color, label: 'CALL'),
+                  ButtonItem(icon: Icons.near_me, color: color, label: 'ROUTE'),
+                  ButtonItem(icon: Icons.share, color: color, label: 'SHARE'),
+                ]),
               ],
             )));
+  }
+}
+
+class ButtonSection extends StatelessWidget {
+  const ButtonSection({Key? key, required this.buttons}) : super(key: key);
+
+  final List<ButtonItem> buttons;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: buttons,
+    );
+  }
+}
+
+class ButtonItem extends StatelessWidget {
+  const ButtonItem(
+      {Key? key, required this.icon, required this.color, required this.label})
+      : super(key: key);
+
+  final IconData icon;
+  final Color color;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          color: color,
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
 
