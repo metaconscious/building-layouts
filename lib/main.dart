@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
             ),
             body: Column(
               children: [
+                const ImageSection(path: 'images/lake.jpg'),
                 const TitleSection(
                   name: 'Oeschinen Lake Campground',
                   location: 'Kandersteg, Switzerland',
@@ -31,15 +32,15 @@ class MyApp extends StatelessWidget {
                   ButtonItem(icon: Icons.share, color: color, label: 'SHARE'),
                 ]),
                 const TextSection(
-                    description:
-                        'Lake Oeschinen lies at the foot of the Blüemlisalp '
-                        'in the Bernese Alps. Situated 1,578 meters above sea '
-                        'level, it is one of the larger Alpine Lakes. A '
-                        'gondola ride from Kandersteg, followed by a half-hour '
-                        'walk through pastures and pine forest, leads you to '
-                        'the lake, which warms to 20 degrees Celsius in the '
-                        'summer. Activities enjoyed here include rowing, and '
-                        'riding the summer toboggan run.'
+                  description:
+                      'Lake Oeschinen lies at the foot of the Blüemlisalp '
+                      'in the Bernese Alps. Situated 1,578 meters above sea '
+                      'level, it is one of the larger Alpine Lakes. A '
+                      'gondola ride from Kandersteg, followed by a half-hour '
+                      'walk through pastures and pine forest, leads you to '
+                      'the lake, which warms to 20 degrees Celsius in the '
+                      'summer. Activities enjoyed here include rowing, and '
+                      'riding the summer toboggan run.',
                 )
               ],
             )));
@@ -159,6 +160,22 @@ class TitleSection extends StatelessWidget {
           Text(stars.toString())
         ],
       ),
+    );
+  }
+}
+
+class ImageSection extends StatelessWidget {
+  const ImageSection({Key? key, required this.path}) : super(key: key);
+
+  final String path;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      path,
+      width: 600,
+      height: 240,
+      fit: BoxFit.cover,
     );
   }
 }
